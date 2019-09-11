@@ -43,7 +43,7 @@ Create the Kubernetes cluster using `Kops`:
 ansible-playbook create-cluster.yaml
 ```
 
-## Updating the cluster
+## Updating the Kubernetes cluster
 All updates to the running Kubernetes cluster can be done directly using `Kops`. 
 
 Create the Kubernetes cluster using `Kops`:
