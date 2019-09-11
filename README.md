@@ -1,17 +1,17 @@
 # Kubernetes setup on Amazon AWS using Kops and Ansible
 This repository contains tooling for deploying a HA Kubernetes cluster in Amazon AWS using the [Kops](https://github.com/kubernetes/kops) tool. The following tools will be install on the cluster by default.
-     - chartmuseam - internal app hub for kubernetes
-     - docker registry - internal registry to be used for apps
-     - elasticsearch - for logs
-     - fluentd - log shipping
-     - kibana - interface for ES
-     - dex - cluster and app authentication using external AD
-     - grafana - graphs for apps and cluster from prometheus
-     - prometheus - monitoring cluster and apps in cluster
-     - node-problem-detector -  problem detectors running on the Kubernetes nodes
-     - setup kubectl-config
-     - kubernetes dashboard
-     - autoscaler for nodes
+- chartmuseam - internal app hub for kubernetes
+- docker registry - internal registry to be used for apps
+- elasticsearch - for logs
+- fluentd - log shipping
+- kibana - interface for ES
+- dex/RBAC - cluster and app authentication using external AD
+- grafana - graphs for apps and cluster from prometheus
+- prometheus - monitoring cluster and apps in cluster
+- node-problem-detector -  problem detectors running on the Kubernetes nodes
+- setup kubectl-config
+- kubernetes dashboard
+- autoscaler for nodes
 
 ## Prerequisites
 The cluster will be deployed from a linux jumpbox/bastion host with the following:
