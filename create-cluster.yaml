@@ -1,0 +1,30 @@
+---
+- hosts: localhost
+  connection: local
+  tasks:
+  - import_role: 
+      name: lambda-delete
+    tags: [use_lambda,never]
+  - import_role: 
+      name: lambda-install
+    tags: [use_lambda,never]
+  - set_fact:
+      lambda_tags: true
+    tags: [use_lambda,never]
+  - import_role: 
+      name: create-cluster
+    tags: always
+  - import_role: 
+      name: ingress
+    tags: always 
+  - import_role: 
+      name: kubectl-config
+    tags: always 
+  - import_role: 
+      name: dashboard
+    tags: always
+  - import_role: 
+      name: autoscaler
+    tags: always   
+    
+

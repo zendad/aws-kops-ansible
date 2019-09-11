@@ -1,0 +1,42 @@
+---
+- name: Create temporary directory
+  tempfile:
+    state: directory
+    suffix: helm
+  register: helm_tempdir
+
+- name: Download helm binaries
+  get_url:
+    url: "{{ helm_download_path }}
+    dest: "{{ helm_tempdir.path }}/helm-{{ helm_version }}-linux-amd64.tar.gz"
+    mode: 0644
+  retries: 10
+  when: ansible_os_family != 'Darwin'
+  become: true
+
+- name: Unpack Helm dist archive
+  unarchive:
+    remote_src: true
+    src: "{{ helm_tempdir.path }}/helm-{{ helm_version }}-linux-amd64.tar.gz"
+    dest: "{{ helm_tempdir.path }}/"
+
+- name: Install Helm binary
+  copy:
+    remote_src: true
+    src: "{{ helm_tempdir.path }}/linux-amd64/helm"
+    dest: /usr/local/bin/helm
+    mode: 0755
+  retries: 10
+  
+- name: Install tiller binary
+  copy:
+    remote_src: true
+    src: "{{ helm_tempdir.path }}/linux-amd64/tiller"
+    dest: /usr/local/bin/tiller
+    mode: 0755
+  retries: 10
+
+- name: Cleanup installation files
+  file:
+    path: "{{ helm_tempdir.path }}"
+    state: absent

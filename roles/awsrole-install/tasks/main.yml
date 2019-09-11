@@ -1,0 +1,12 @@
+---
+- name: kops master role
+  iam_role:
+    name: kops-master-role
+    assume_role_policy_document: "{{ lookup('file','master_policy.json') }}"
+    description: kops master role
+
+- name: kops node role
+  iam_role:
+    name: kops-node-role
+    assume_role_policy_document: "{{ lookup('file','node_policy.json') }}"
+    description: kops node role

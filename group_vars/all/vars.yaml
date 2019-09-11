@@ -1,0 +1,50 @@
+---
+cluster_name: cluster.dereckzenda.com
+state_store: s3://kops-state-store
+
+## Remote access
+ssh_public_key: ~/.ssh/id_rsa.pub
+
+## Regions / Availability zones
+aws_region: eu-west-1
+aws_zones: eu-west-1a, eu-west-1b, eu-west-1c
+master_zones: eu-west-1a, eu-west-1b, eu-west-1c
+
+## Network
+dns_zone: dereckzenda.com
+network_cidr: 172.16.0.0/16
+kubernetes_networking: kubenet
+# Topology must be either public or private
+topology: public
+
+
+## EC2 host sizing
+base_image: ami-0f3ca19938d8320b2 # custom AWS linux 2 image
+
+# Master configuration
+master_size: m5.xlarge
+master_count: 1
+master_volume_size: 50
+master_profile: arn:aws:iam::[account]:instance-profile/kops-master-role
+
+# Node configuration
+node_size: r4.xlarge
+node_count: 1
+node_volume_size: 50
+node_autoscaler_min: 5
+node_autoscaler_max: 15
+node_profile: arn:aws:iam::[account]:instance-profile/kops-node-role
+
+
+## Tags
+tag_creator: MyName
+tag_owner: MyName
+tag_environment: Development
+
+## Cluster spec
+kubernetes_version: 1.11.3
+
+# IAM
+iam:
+  allow_container_registry: true
+  legacy: false

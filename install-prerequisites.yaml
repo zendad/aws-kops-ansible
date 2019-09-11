@@ -1,0 +1,10 @@
+---
+- hosts: localhost
+  connection: local
+  roles:
+    - kubectl-install
+    - awscli-install
+    - awsrole-install
+    - kops-install
+    - helm-install
+    - create-bucket-state
